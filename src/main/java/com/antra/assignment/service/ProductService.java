@@ -2,6 +2,7 @@ package com.antra.assignment.service;
 
 import com.antra.assignment.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,11 +12,15 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
+
+
+//    @Qualifier("ProductStorage")
     private Map<Integer, Product> productRepository;
 
     @Autowired
     public ProductService(Map<Integer, Product> productRepository) {
         this.productRepository = productRepository;
+
     }
 
     public Product getProduct(Integer id) {
@@ -42,7 +47,7 @@ public class ProductService {
         productRepository.put(id, product);
     }
     public void createProduct(Integer id, Product product) {
-        if (!productRepository.containsKey(id)) {
+        if (productRepository.containsKey(id)) {
             return; // do exception
         }
         productRepository.put(id, product);

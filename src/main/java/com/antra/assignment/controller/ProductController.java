@@ -31,9 +31,9 @@ public class ProductController {
 
     @PostMapping("/product")
     public void createProduct(@RequestParam("productId") Integer id, @RequestParam("productName") String name) {
-
+        System.out.println("id: " + id + " name: " + name);
         productService.createProduct(id, new Product(id, name));
-
+        System.out.println(productService.getAllProducts());
     }
 
     @DeleteMapping("/product/{productId}")
